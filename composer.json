@@ -1,0 +1,17 @@
+{
+    "name": "darp5756/pydolar",
+    "description": "Consulta de la API de PyDolar en Laravel",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Darp5756\\Pydolar\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Darp5756",
+            "email": "darp7512@gmail.com"
+        }
+    ],
+    "require": {}
+}
