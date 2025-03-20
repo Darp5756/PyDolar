@@ -13,5 +13,7 @@
             "email": "darp7512@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "illuminate/support": "^12.3"
+    }
 }

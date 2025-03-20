@@ -1,0 +1,79 @@
+{
+    "alcambio": [
+        "bcv",
+        "enparalelovzla"
+    ],
+    "bcv": [
+        "100%_banco",
+        "activo",
+        "bancamiga",
+        "bancaribe",
+        "banesco",
+        "bangente",
+        "banplus",
+        "bdv",
+        "bnc",
+        "bvc",
+        "cny",
+        "eur",
+        "exterior",
+        "mercantil_banco",
+        "mi_banco",
+        "otras_instituciones",
+        "plaza",
+        "provincial",
+        "rub",
+        "sofitasa",
+        "try",
+        "usd"
+    ],
+    "criptodolar": [
+        "amazon_gift_card",
+        "bcv",
+        "binance",
+        "cripto_dolar",
+        "dolar_today",
+        "enparalelovzla",
+        "paypal",
+        "promedio",
+        "skrill",
+        "uphold"
+    ],
+    "dolartoday": [
+        "bcv",
+        "bitcoin",
+        "cucuta",
+        "dolartoday",
+        "petro"
+    ],
+    "enparalelovzla": [
+        "enparalelovzla"
+    ],
+    "italcambio": [
+        "ang",
+        "ars",
+        "aud",
+        "bob",
+        "brl",
+        "cad",
+        "chf",
+        "clp",
+        "cny",
+        "cop",
+        "dkk",
+        "dop",
+        "eur",
+        "gbp",
+        "hkd",
+        "ils",
+        "jpy",
+        "nio",
+        "nok",
+        "pen",
+        "sek",
+        "ttd",
+        "twd",
+        "usd",
+        "uyu"
+    ]
+}
