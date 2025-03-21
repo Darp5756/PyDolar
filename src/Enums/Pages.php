@@ -1,6 +1,6 @@
 <?php
 
-namespace Darp5756\Pydolar\Enums;
+namespace Darp5756\PyDolar\Enums;
 
 enum Pages: string {
     case alcambio = 'alcambio';

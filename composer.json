@@ -4,7 +4,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Darp5756\\Pydolar\\": "src/"
+            "Darp5756\\PyDolar\\": "src/"
         }
     },
     "authors": [

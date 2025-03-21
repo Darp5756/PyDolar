@@ -2,9 +2,9 @@
 
 namespace Darp5756\PyDolar;
 
-use Darp5756\Pydolar\Enums\Currencies;
-use Darp5756\Pydolar\Enums\FormatDates;
-use Darp5756\Pydolar\Enums\Pages;
+use Darp5756\PyDolar\Enums\Currencies;
+use Darp5756\PyDolar\Enums\FormatDates;
+use Darp5756\PyDolar\Enums\Pages;
 use Exception;
 use Illuminate\Support\Facades\Http;
 
@@ -27,7 +27,7 @@ class PyDolar {
         if ($currency == Currencies::euro && $page != Pages::criptodolar) {
             return [];
         }
-        $monitors = json_decode(file_get_contents(__DIR__ .'json/monitors.json'), true);
+        $monitors = json_decode(file_get_contents(__DIR__ .'/json/monitors.json'), true);
         return $monitors[$page->value];
     }
 
