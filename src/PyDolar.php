@@ -21,7 +21,7 @@ class PyDolar {
                 'page' => $page->value,
                 'monitor' => $monitor,
                 'format_date' => $formatDate->value,
-                'rounded_price' => $roundedPrice,
+                'rounded_price' => json_encode($roundedPrice),
             ],
         ]);
         return json_decode($response->getBody(), true);
