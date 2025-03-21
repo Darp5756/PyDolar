@@ -6,7 +6,7 @@ use Darp5756\PyDolar\Enums\Currencies;
 use Darp5756\PyDolar\Enums\FormatDates;
 use Darp5756\PyDolar\Enums\Pages;
 use Exception;
-use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 class PyDolar {
     private const URL_API = 'https://pydolarve.org/api/v1/';
@@ -15,12 +15,16 @@ class PyDolar {
         if (!self::isMonitorValid($currency, $page, $monitor)) {
             throw new Exception('Monitor is invalid');
         }
-        return Http::get(self::URL_API . $currency->value, [
-            'page' => $page->value,
-            'monitor' => $monitor,
-            'format_date' => $formatDate->value,
-            'rounded_price' => $roundedPrice,
-        ])->json();
+        $client = new Client();
+        $response = $client->get(self::URL_API . $currency->value, [
+            'query' => [
+                'page' => $page->value,
+                'monitor' => $monitor,
+                'format_date' => $formatDate->value,
+                'rounded_price' => $roundedPrice,
+            ],
+        ]);
+        return json_decode($response->getBody(), true);
     }
 
     public static function getMonitors (Currencies $currency, Pages $page): array {
