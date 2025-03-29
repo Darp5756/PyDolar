@@ -2,31 +2,55 @@
 
 namespace Darp5756\PyDolar\Tests\Unit;
 
+use Carbon\Carbon;
 use Darp5756\PyDolar\Enums\Currencies;
 use Darp5756\PyDolar\Enums\FormatDates;
+use Darp5756\PyDolar\Enums\Orders;
 use Darp5756\PyDolar\Enums\Pages;
+use Darp5756\PyDolar\Enums\RoundedPrices;
 use Darp5756\PyDolar\PyDolar;
+use Dotenv\Dotenv;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
 class PyDolarTest extends TestCase {
 
-    // getData($currency, $page, $monitor, $formatDate, $roundedPrice)
-
-    public function testExceptionMonitorInvalido () {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Monitor is invalid');
-        PyDolar::getData(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', FormatDates::default, true);
+    public static function setUpBeforeClass(): void
+    {
+        //Cargar variables de entorno
+        Dotenv::createImmutable(__DIR__.'/../../')->load();
     }
 
-    public function testExceptionSinMonitor () {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Monitor is invalid');
-        PyDolar::getData(Currencies::euro, Pages::dolartoday, 'dolartoday', FormatDates::default, true);
+    // getDataMonitor($currency, $page, $monitor, $formatDate, $roundedPrice)
+
+    public function testExceptionMonitorInvalidoGetDataMonitor () {
+        $this->testExceptionMonitorIsInvalid();
+        PyDolar::getDataMonitor(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', FormatDates::default, RoundedPrices::true);
     }
 
-    public function testGetData () {
-        return $this->assertNotEmpty(PyDolar::getData(Currencies::dollar, Pages::alcambio, 'bcv', FormatDates::default, true));
+    public function testExceptionSinMonitorGetDataMonitor () {
+        $this->testExceptionMonitorIsInvalid();
+        PyDolar::getDataMonitor(Currencies::euro, Pages::dolartoday, 'dolartoday', FormatDates::default, RoundedPrices::true);
+    }
+
+    public function testGetDataMonitor () {
+        return $this->assertNotEmpty(PyDolar::getDataMonitor(Currencies::dollar, Pages::alcambio, 'bcv', FormatDates::default, RoundedPrices::true));
+    }
+
+    // getDataHistorial()
+
+    public function testExceptionMonitorInvalidoGetDataHistorial () {
+        $this->testExceptionMonitorIsInvalid();
+        PyDolar::getDataHistorial(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', Carbon::yesterday(), Carbon::yesterday(), FormatDates::default, RoundedPrices::true, Orders::asc);
+    }
+
+    public function testExceptionSinMonitorGetDataHistorial () {
+        $this->testExceptionMonitorIsInvalid();
+        PyDolar::getDataHistorial(Currencies::euro, Pages::dolartoday, 'dolartoday',   Carbon::yesterday(), Carbon::yesterday(), FormatDates::default, RoundedPrices::true, Orders::asc);
+    }
+
+    public function testGetDataHistorial () {
+        return $this->assertNotEmpty(PyDolar::getDataHistorial(Currencies::dollar, Pages::alcambio, 'bcv', Carbon::yesterday(), Carbon::yesterday(), FormatDates::default, RoundedPrices::true, Orders::asc));
     }
 
     // getMonitors($currency, $page)
@@ -51,6 +75,13 @@ class PyDolarTest extends TestCase {
 
     public function testMonitorInvalido() {
         return $this->assertFalse(PyDolar::isMonitorValid(Currencies::dollar, Pages::dolartoday, 'monitorInvalido'));
+    }
+
+    // Funciones privadas
+
+    private function testExceptionMonitorIsInvalid () {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Monitor is invalid');
     }
 
 }
