@@ -9,6 +9,8 @@ use Darp5756\PyDolar\Enums\Orders;
 use Darp5756\PyDolar\Enums\Pages;
 use Darp5756\PyDolar\Enums\RoundedPrices;
 use Darp5756\PyDolar\PyDolar;
+use Darp5756\PyDolar\Responses\HistorialResponse;
+use Darp5756\PyDolar\Responses\MonitorResponse;
 use Dotenv\Dotenv;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -41,7 +43,7 @@ class PyDolarTest extends TestCase {
     }
 
     public function testGetDataMonitor () {
-        return $this->assertNotEmpty(PyDolar::getDataMonitor(Currencies::dollar, Pages::alcambio, 'bcv', FormatDates::default, RoundedPrices::true));
+        return $this->assertInstanceOf(MonitorResponse::class, PyDolar::getDataMonitor(Currencies::dollar, Pages::alcambio, 'bcv', FormatDates::default, RoundedPrices::true));
     }
 
     // getDataHistorial()
@@ -57,7 +59,7 @@ class PyDolarTest extends TestCase {
     }
 
     public function testGetDataHistorial () {
-        return $this->assertNotEmpty(PyDolar::getDataHistorial(Currencies::dollar, Pages::alcambio, 'bcv', self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc));
+        return $this->assertInstanceOf(HistorialResponse::class, PyDolar::getDataHistorial(Currencies::dollar, Pages::alcambio, 'bcv', self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc));
     }
 
     // getMonitors($currency, $page)
