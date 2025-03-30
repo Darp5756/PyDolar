@@ -1,6 +1,6 @@
 <?php
 
-namespace Darp5756\PyDolar\Responses;
+namespace Darp5756\PyDolar\Responses\Data;
 
 class History
 {

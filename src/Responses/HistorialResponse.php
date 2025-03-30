@@ -3,6 +3,7 @@
 namespace Darp5756\PyDolar\Responses;
 
 use Darp5756\PyDolar\Responses\Base\DateTimeResponse;
+use Darp5756\PyDolar\Responses\Data\History;
 use InvalidArgumentException;
 
 class HistorialResponse extends DateTimeResponse
