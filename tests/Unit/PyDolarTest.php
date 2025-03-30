@@ -15,10 +15,17 @@ use PHPUnit\Framework\TestCase;
 
 class PyDolarTest extends TestCase {
 
+    private static Carbon $date;
+    private static Carbon $startDate;
+    private static Carbon $endDate;
+
     public static function setUpBeforeClass(): void
     {
         //Cargar variables de entorno
         Dotenv::createImmutable(__DIR__.'/../../')->load();
+        self::$date = Carbon::parse(env('DATE_TEST'));
+        self::$startDate = Carbon::parse(env('START_DATE_TEST'));
+        self::$endDate = Carbon::parse(env('END_DATE_TEST'));
     }
 
     // getDataMonitor($currency, $page, $monitor, $formatDate, $roundedPrice)
@@ -41,16 +48,16 @@ class PyDolarTest extends TestCase {
 
     public function testExceptionMonitorInvalidoGetDataHistorial () {
         $this->testExceptionMonitorIsInvalid();
-        PyDolar::getDataHistorial(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', Carbon::yesterday(), Carbon::yesterday(), FormatDates::default, RoundedPrices::true, Orders::asc);
+        PyDolar::getDataHistorial(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc);
     }
 
     public function testExceptionSinMonitorGetDataHistorial () {
         $this->testExceptionMonitorIsInvalid();
-        PyDolar::getDataHistorial(Currencies::euro, Pages::dolartoday, 'dolartoday',   Carbon::yesterday(), Carbon::yesterday(), FormatDates::default, RoundedPrices::true, Orders::asc);
+        PyDolar::getDataHistorial(Currencies::euro, Pages::dolartoday, 'dolartoday',   self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc);
     }
 
     public function testGetDataHistorial () {
-        return $this->assertNotEmpty(PyDolar::getDataHistorial(Currencies::dollar, Pages::alcambio, 'bcv', Carbon::yesterday(), Carbon::yesterday(), FormatDates::default, RoundedPrices::true, Orders::asc));
+        return $this->assertNotEmpty(PyDolar::getDataHistorial(Currencies::dollar, Pages::alcambio, 'bcv', self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc));
     }
 
     // getMonitors($currency, $page)
