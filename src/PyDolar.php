@@ -81,7 +81,7 @@ class PyDolar {
             'content-type' => 'application/json',
         ];
         if ($includeAuthorization) {
-            $headers['Authorization'] = 'Bearer ' . env('PYDOLAR_TOKEN');
+            $headers['Authorization'] = env('PYDOLAR_TOKEN');
         }
         $client = new Client();
         $response = $client->get($uri, [
