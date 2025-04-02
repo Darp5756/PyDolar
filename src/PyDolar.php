@@ -81,7 +81,7 @@ class PyDolar {
         if ($currency == Currencies::euro && $page != Pages::criptodolar) {
             return [];
         }
-        $monitors = json_decode(file_get_contents(__DIR__ .'/json/monitors.json'), true);
+        $monitors = json_decode(file_get_contents(__DIR__ .'/../resources/json/monitors.json'), true);
         return $monitors[$page->value];
     }
 
