@@ -86,6 +86,10 @@ class PyDolarTest extends TestCase {
         return $this->assertFalse(PyDolar::isMonitorValid(Currencies::dollar, Pages::dolartoday, 'monitorInvalido'));
     }
 
+	public function testMonitorInvalidoCadenaVacia() {
+		return $this->assertFalse(PyDolar::isMonitorValid(Currencies::dollar, Pages::alcambio, ''));
+	}
+
     // Funciones privadas
 
     private function testExceptionMonitorIsInvalid () {

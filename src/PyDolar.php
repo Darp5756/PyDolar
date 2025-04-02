@@ -86,7 +86,7 @@ class PyDolar {
     }
 
     public static function isMonitorValid (Currencies $currency, Pages $page, string $monitor): bool {
-        return in_array($monitor, self::getMonitors($currency, $page));
+        return in_array($monitor, self::getMonitors($currency, $page), true);
     }
 
     private static function getData (
