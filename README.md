@@ -13,7 +13,7 @@ Para utilizar algunas funciones de la api, es necesario contar con el token de a
 Agrega la siguiente variable de entorno en el archivo `.env`:
 
 ```
-PYDOLAR_TOKEN="Bearer token"
+PYDOLAR_TOKEN=token
 ```
 
 ## Créditos
