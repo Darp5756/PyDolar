@@ -8,10 +8,13 @@ use Darp5756\PyDolar\Enums\FormatDates;
 use Darp5756\PyDolar\Enums\Orders;
 use Darp5756\PyDolar\Enums\Pages;
 use Darp5756\PyDolar\Enums\RoundedPrices;
+use Darp5756\PyDolar\Enums\Types;
+use Darp5756\PyDolar\Responses\CambiosResponse;
 use Darp5756\PyDolar\Responses\ErrorResponse;
 use Darp5756\PyDolar\Responses\HistorialResponse;
 use Darp5756\PyDolar\Responses\MonitorResponse;
 use Darp5756\PyDolar\Responses\MonitorsResponse;
+use Darp5756\PyDolar\Responses\ValorResponse;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -76,6 +79,58 @@ class PyDolar {
         }
         return new HistorialResponse($response->getStatusCode(), json_decode($response->getBody(), true));
     }
+
+	public static function getDataCambios(
+        Currencies $currency,
+        Pages $page,
+        string $monitor,
+        Carbon $date,
+        FormatDates $formatDate = FormatDates::default,
+        RoundedPrices $roundedPrice = RoundedPrices::true,
+        Orders $order = Orders::desc,
+    ): CambiosResponse|ErrorResponse {
+        self::validateMonitor($currency, $page, $monitor);
+        $response = self::getData(
+            self::URL_API . $currency->value . '/changes',
+            [
+                'page'=> $page->value,
+                'monitor' => $monitor,
+                'date' => $date->format('d-m-Y'),
+                'format_date' => $formatDate->value,
+                'rounded_price' => $roundedPrice->value,
+                'order' => $order->value,
+            ],
+            true,
+        );
+        if ($response instanceof ErrorResponse) {
+            return $response;
+        }
+        return new CambiosResponse($response->getStatusCode(), json_decode($response->getBody(), true));
+    }
+
+	public static function getDataValor(
+		Currencies $currency,
+		Types $type,
+		float $value,
+		Pages $page,
+		string $monitor,
+	): ValorResponse|ErrorResponse{
+		self::validateMonitor($currency, $page, $monitor);
+        $response = self::getData(
+            self::URL_API . $currency->value . '/conversion',
+            [
+				'type' => $type->value,
+				'value' => $value,
+                'page'=> $page->value,
+                'monitor' => $monitor,
+            ],
+            true,
+        );
+        if ($response instanceof ErrorResponse) {
+            return $response;
+        }
+		return new ValorResponse($response->getStatusCode(), json_decode($response->getBody(), true));
+	}
 
     public static function getMonitors (Currencies $currency, Pages $page): array {
         if ($currency == Currencies::euro && $page != Pages::criptodolar) {

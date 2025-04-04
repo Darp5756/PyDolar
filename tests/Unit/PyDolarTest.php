@@ -8,9 +8,12 @@ use Darp5756\PyDolar\Enums\FormatDates;
 use Darp5756\PyDolar\Enums\Orders;
 use Darp5756\PyDolar\Enums\Pages;
 use Darp5756\PyDolar\Enums\RoundedPrices;
+use Darp5756\PyDolar\Enums\Types;
 use Darp5756\PyDolar\PyDolar;
+use Darp5756\PyDolar\Responses\CambiosResponse;
 use Darp5756\PyDolar\Responses\HistorialResponse;
 use Darp5756\PyDolar\Responses\MonitorResponse;
+use Darp5756\PyDolar\Responses\ValorResponse;
 use Dotenv\Dotenv;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -60,6 +63,38 @@ class PyDolarTest extends TestCase {
 
     public function testGetDataHistorial () {
         return $this->assertInstanceOf(HistorialResponse::class, PyDolar::getDataHistorial(Currencies::dollar, Pages::alcambio, 'bcv', self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc));
+    }
+
+	// getDataCambios()
+
+    public function testExceptionMonitorInvalidoGetDataCambios () {
+        $this->testExceptionMonitorIsInvalid();
+        PyDolar::getDataCambios(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', self::$date, FormatDates::default, RoundedPrices::true, Orders::asc);
+    }
+
+    public function testExceptionSinMonitorGetDataCambios () {
+        $this->testExceptionMonitorIsInvalid();
+        PyDolar::getDataCambios(Currencies::euro, Pages::dolartoday, 'dolartoday',   self::$date, FormatDates::default, RoundedPrices::true, Orders::asc);
+    }
+
+    public function testGetDataCambios () {
+        return $this->assertInstanceOf(CambiosResponse::class, PyDolar::getDataCambios(Currencies::dollar, Pages::alcambio, 'bcv', self::$date, FormatDates::default, RoundedPrices::true, Orders::asc));
+    }
+
+	// getDataValor()
+
+    public function testExceptionMonitorInvalidoGetDataValor () {
+        $this->testExceptionMonitorIsInvalid();
+        PyDolar::getDataValor(Currencies::dollar, Types::USD, 1, Pages::dolartoday, 'monitorInvalido');
+    }
+
+    public function testExceptionSinMonitorGetDataValor () {
+        $this->testExceptionMonitorIsInvalid();
+        PyDolar::getDataValor(Currencies::euro, Types::USD, 1, Pages::dolartoday, 'dolartoday', );
+    }
+
+    public function testGetDataValor () {
+        return $this->assertInstanceOf(ValorResponse::class, PyDolar::getDataValor(Currencies::dollar, Types::USD, 1, Pages::alcambio, 'bcv'));
     }
 
     // getMonitors($currency, $page)

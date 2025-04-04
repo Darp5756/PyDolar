@@ -4,7 +4,6 @@ namespace Darp5756\PyDolar\Responses;
 
 use Darp5756\PyDolar\Responses\Base\DateTimeResponse;
 use Darp5756\PyDolar\Responses\Data\History;
-use InvalidArgumentException;
 
 class HistorialResponse extends DateTimeResponse
 {
@@ -20,13 +19,5 @@ class HistorialResponse extends DateTimeResponse
 
     public function getHistorys (): array {
         return $this->histories;
-    }
-
-    public function getHistory (string $history): History
-    {
-        if (!array_key_exists($history, $this->histories)) {
-            throw new InvalidArgumentException("History '{$history}' is invalid.");
-        }
-        return $this->histories[$history];
     }
 }
