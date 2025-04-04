@@ -124,7 +124,7 @@ class PyDolar {
                 'page'=> $page->value,
                 'monitor' => $monitor,
             ],
-            true,
+            false,
         );
         if ($response instanceof ErrorResponse) {
             return $response;
