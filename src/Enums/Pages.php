@@ -2,7 +2,8 @@
 
 namespace Darp5756\PyDolar\Enums;
 
-enum Pages: string {
+enum Pages: string
+{
     case alcambio = 'alcambio';
     case bcv = 'bcv';
     case criptodolar = 'criptodolar';

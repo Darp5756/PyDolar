@@ -23,4 +23,3 @@ Este paquete utiliza la API proporcionada por [fcoagz](https://github.com/fcoagz
 - API: [pydolarve.org](https://pydolarve.org/)
 - Documentación: [docs.pydolarve.org](https://docs.pydolarve.org/)
 - Swagger API: [pydolarve.org/apidocs](https://pydolarve.org/apidocs)
-

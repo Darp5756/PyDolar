@@ -9,7 +9,8 @@ class MonitorsResponse extends DateTimeResponse
 {
     private array $monitors;
 
-    public function __construct($statusCode, array $data) {
+    public function __construct (int $statusCode, array $data)
+	{
         parent::__construct($statusCode, $data);
         foreach ($data['monitors'] as $monitor => $dataMonitor) {
             $this->monitors[] = [$monitor => new MonitorsResponse($statusCode, $dataMonitor)];

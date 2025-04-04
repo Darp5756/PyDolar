@@ -8,13 +8,14 @@ class ValorResponse extends Response
 {
     private float $result;
 
-    public function __construct($statusCode, float $result)
+    public function __construct (int $statusCode, float $result)
     {
         parent::__construct($statusCode);
         $this->result = $result;
     }
 
-    public function getResult (): float {
+    public function getResult (): float
+	{
         return $this->result;
     }
 }

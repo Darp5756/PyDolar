@@ -9,7 +9,8 @@ class History
     private float $priceHigh;
     private float $priceLow;
 
-    public function __construct(array $data) {
+    public function __construct (array $data)
+	{
         $this->lastUpdate = $data['last_update'];
         $this->price = $data['price'];
         $this->priceHigh = $data['price_high'];

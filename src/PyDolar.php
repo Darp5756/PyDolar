@@ -20,7 +20,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
 
-class PyDolar {
+class PyDolar
+{
     private const URL_API = 'https://pydolarve.org/api/v1/';
 
     public static function getDataMonitor (
@@ -29,7 +30,8 @@ class PyDolar {
         string $monitor = '',
         FormatDates $formatDate = FormatDates::default,
         RoundedPrices $roundedPrice = RoundedPrices::true,
-    ): MonitorResponse|MonitorsResponse|ErrorResponse {
+    ): MonitorResponse|MonitorsResponse|ErrorResponse
+	{
         self::validateMonitor($currency, $page, $monitor);
         $response = self::getData(
             self::URL_API . $currency->value,
@@ -59,7 +61,8 @@ class PyDolar {
         FormatDates $formatDate = FormatDates::default,
         RoundedPrices $roundedPrice = RoundedPrices::true,
         Orders $order = Orders::desc,
-    ): HistorialResponse|ErrorResponse {
+    ): HistorialResponse|ErrorResponse
+	{
         self::validateMonitor($currency, $page, $monitor);
         $response = self::getData(
             self::URL_API . $currency->value . '/history',
@@ -88,7 +91,8 @@ class PyDolar {
         FormatDates $formatDate = FormatDates::default,
         RoundedPrices $roundedPrice = RoundedPrices::true,
         Orders $order = Orders::desc,
-    ): CambiosResponse|ErrorResponse {
+    ): CambiosResponse|ErrorResponse
+	{
         self::validateMonitor($currency, $page, $monitor);
         $response = self::getData(
             self::URL_API . $currency->value . '/changes',
@@ -114,7 +118,8 @@ class PyDolar {
 		float $value,
 		Pages $page,
 		string $monitor,
-	): ValorResponse|ErrorResponse{
+	): ValorResponse|ErrorResponse
+	{
 		self::validateMonitor($currency, $page, $monitor);
         $response = self::getData(
             self::URL_API . $currency->value . '/conversion',
@@ -132,7 +137,8 @@ class PyDolar {
 		return new ValorResponse($response->getStatusCode(), json_decode($response->getBody(), true));
 	}
 
-    public static function getMonitors (Currencies $currency, Pages $page): array {
+    public static function getMonitors (Currencies $currency, Pages $page): array
+	{
         if ($currency == Currencies::euro && $page != Pages::criptodolar) {
             return [];
         }
@@ -140,7 +146,8 @@ class PyDolar {
         return $monitors[$page->value];
     }
 
-    public static function isMonitorValid (Currencies $currency, Pages $page, string $monitor): bool {
+    public static function isMonitorValid (Currencies $currency, Pages $page, string $monitor): bool
+	{
         return in_array($monitor, self::getMonitors($currency, $page), true);
     }
 
@@ -148,7 +155,8 @@ class PyDolar {
         string $uri,
         array $query,
         bool $includeAuthorization,
-    ): ResponseInterface|ErrorResponse {
+    ): ResponseInterface|ErrorResponse
+	{
         try {
             $headers = [
                 'content-type' => 'application/json',
@@ -186,7 +194,8 @@ class PyDolar {
         Currencies $currency,
         Pages $page,
         string $monitor
-    ): void {
+    ): void
+	{
         if (!self::isMonitorValid($currency, $page, $monitor)) {
             throw new Exception('Monitor is invalid');
         }

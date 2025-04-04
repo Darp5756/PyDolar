@@ -9,7 +9,7 @@ class HistorialResponse extends DateTimeResponse
 {
     private array $histories;
 
-    public function __construct($statusCode, array $data)
+    public function __construct (int $statusCode, array $data)
     {
         parent::__construct($statusCode, $data);
         foreach ($data['history'] as $history) {
@@ -17,7 +17,8 @@ class HistorialResponse extends DateTimeResponse
         }
     }
 
-    public function getHistorys (): array {
+    public function getHistorys (): array
+	{
         return $this->histories;
     }
 }

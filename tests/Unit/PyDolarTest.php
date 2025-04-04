@@ -18,8 +18,8 @@ use Dotenv\Dotenv;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
-class PyDolarTest extends TestCase {
-
+class PyDolarTest extends TestCase
+{
     private static Carbon $date;
     private static Carbon $startDate;
     private static Carbon $endDate;
@@ -35,101 +35,119 @@ class PyDolarTest extends TestCase {
 
     // getDataMonitor($currency, $page, $monitor, $formatDate, $roundedPrice)
 
-    public function testExceptionMonitorInvalidoGetDataMonitor () {
+    public function testExceptionMonitorInvalidoGetDataMonitor (): void
+	{
         $this->testExceptionMonitorIsInvalid();
         PyDolar::getDataMonitor(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', FormatDates::default, RoundedPrices::true);
     }
 
-    public function testExceptionSinMonitorGetDataMonitor () {
+    public function testExceptionSinMonitorGetDataMonitor (): void
+	{
         $this->testExceptionMonitorIsInvalid();
         PyDolar::getDataMonitor(Currencies::euro, Pages::dolartoday, 'dolartoday', FormatDates::default, RoundedPrices::true);
     }
 
-    public function testGetDataMonitor () {
-        return $this->assertInstanceOf(MonitorResponse::class, PyDolar::getDataMonitor(Currencies::dollar, Pages::alcambio, 'bcv', FormatDates::default, RoundedPrices::true));
+    public function testGetDataMonitor (): void
+	{
+        $this->assertInstanceOf(MonitorResponse::class, PyDolar::getDataMonitor(Currencies::dollar, Pages::alcambio, 'bcv', FormatDates::default, RoundedPrices::true));
     }
 
     // getDataHistorial()
 
-    public function testExceptionMonitorInvalidoGetDataHistorial () {
+    public function testExceptionMonitorInvalidoGetDataHistorial (): void
+	{
         $this->testExceptionMonitorIsInvalid();
         PyDolar::getDataHistorial(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc);
     }
 
-    public function testExceptionSinMonitorGetDataHistorial () {
+    public function testExceptionSinMonitorGetDataHistorial (): void
+	{
         $this->testExceptionMonitorIsInvalid();
         PyDolar::getDataHistorial(Currencies::euro, Pages::dolartoday, 'dolartoday',   self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc);
     }
 
-    public function testGetDataHistorial () {
-        return $this->assertInstanceOf(HistorialResponse::class, PyDolar::getDataHistorial(Currencies::dollar, Pages::alcambio, 'bcv', self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc));
+    public function testGetDataHistorial (): void
+	{
+        $this->assertInstanceOf(HistorialResponse::class, PyDolar::getDataHistorial(Currencies::dollar, Pages::alcambio, 'bcv', self::$startDate, self::$endDate, FormatDates::default, RoundedPrices::true, Orders::asc));
     }
 
 	// getDataCambios()
 
-    public function testExceptionMonitorInvalidoGetDataCambios () {
+    public function testExceptionMonitorInvalidoGetDataCambios (): void
+	{
         $this->testExceptionMonitorIsInvalid();
         PyDolar::getDataCambios(Currencies::dollar, Pages::dolartoday, 'monitorInvalido', self::$date, FormatDates::default, RoundedPrices::true, Orders::asc);
     }
 
-    public function testExceptionSinMonitorGetDataCambios () {
+    public function testExceptionSinMonitorGetDataCambios (): void
+	{
         $this->testExceptionMonitorIsInvalid();
         PyDolar::getDataCambios(Currencies::euro, Pages::dolartoday, 'dolartoday',   self::$date, FormatDates::default, RoundedPrices::true, Orders::asc);
     }
 
-    public function testGetDataCambios () {
-        return $this->assertInstanceOf(CambiosResponse::class, PyDolar::getDataCambios(Currencies::dollar, Pages::alcambio, 'bcv', self::$date, FormatDates::default, RoundedPrices::true, Orders::asc));
+    public function testGetDataCambios (): void
+	{
+        $this->assertInstanceOf(CambiosResponse::class, PyDolar::getDataCambios(Currencies::dollar, Pages::alcambio, 'bcv', self::$date, FormatDates::default, RoundedPrices::true, Orders::asc));
     }
 
 	// getDataValor()
 
-    public function testExceptionMonitorInvalidoGetDataValor () {
+    public function testExceptionMonitorInvalidoGetDataValor (): void
+	{
         $this->testExceptionMonitorIsInvalid();
         PyDolar::getDataValor(Currencies::dollar, Types::USD, 1, Pages::dolartoday, 'monitorInvalido');
     }
 
-    public function testExceptionSinMonitorGetDataValor () {
+    public function testExceptionSinMonitorGetDataValor (): void
+	{
         $this->testExceptionMonitorIsInvalid();
         PyDolar::getDataValor(Currencies::euro, Types::USD, 1, Pages::dolartoday, 'dolartoday', );
     }
 
-    public function testGetDataValor () {
-        return $this->assertInstanceOf(ValorResponse::class, PyDolar::getDataValor(Currencies::dollar, Types::USD, 1, Pages::alcambio, 'bcv'));
+    public function testGetDataValor (): void
+	{
+        $this->assertInstanceOf(ValorResponse::class, PyDolar::getDataValor(Currencies::dollar, Types::USD, 1, Pages::alcambio, 'bcv'));
     }
 
     // getMonitors($currency, $page)
 
-    public function testMonitoresDolarDolartoday () {
-        return $this->assertNotEmpty(PyDolar::getMonitors(Currencies::dollar, Pages::dolartoday));
+    public function testMonitoresDolarDolartoday (): void
+	{
+        $this->assertNotEmpty(PyDolar::getMonitors(Currencies::dollar, Pages::dolartoday));
     }
 
-    public function testMonitoresEuroCriptodolar () {
-        return $this->assertNotEmpty(PyDolar::getMonitors(Currencies::dollar, Pages::criptodolar));
+    public function testMonitoresEuroCriptodolar (): void
+	{
+        $this->assertNotEmpty(PyDolar::getMonitors(Currencies::dollar, Pages::criptodolar));
     }
 
-    public function testSinMonitoresEuroNoCriptodolar () {
-        return $this->assertEmpty(PyDolar::getMonitors(Currencies::euro, Pages::dolartoday));
+    public function testSinMonitoresEuroNoCriptodolar (): void
+	{
+        $this->assertEmpty(PyDolar::getMonitors(Currencies::euro, Pages::dolartoday));
     }
 
     // isMonitorValid($currency, $page, $monitor)
 
-    public function testMonitorValido () {
-        return $this->assertTrue(PyDolar::isMonitorValid(Currencies::euro, Pages::criptodolar, 'amazon_gift_card'));
+    public function testMonitorValido (): void
+	{
+        $this->assertTrue(PyDolar::isMonitorValid(Currencies::euro, Pages::criptodolar, 'amazon_gift_card'));
     }
 
-    public function testMonitorInvalido() {
-        return $this->assertFalse(PyDolar::isMonitorValid(Currencies::dollar, Pages::dolartoday, 'monitorInvalido'));
+    public function testMonitorInvalido(): void
+	{
+        $this->assertFalse(PyDolar::isMonitorValid(Currencies::dollar, Pages::dolartoday, 'monitorInvalido'));
     }
 
-	public function testMonitorInvalidoCadenaVacia() {
-		return $this->assertFalse(PyDolar::isMonitorValid(Currencies::dollar, Pages::alcambio, ''));
+	public function testMonitorInvalidoCadenaVacia(): void
+	{
+		$this->assertFalse(PyDolar::isMonitorValid(Currencies::dollar, Pages::alcambio, ''));
 	}
 
     // Funciones privadas
 
-    private function testExceptionMonitorIsInvalid () {
+    private function testExceptionMonitorIsInvalid (): void
+	{
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Monitor is invalid');
     }
-
 }

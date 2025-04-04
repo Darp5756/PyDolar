@@ -9,7 +9,7 @@ class CambiosResponse extends DateTimeResponse
 {
     private array $changes;
 
-    public function __construct($statusCode, array $data)
+    public function __construct (int $statusCode, array $data)
     {
         parent::__construct($statusCode, $data);
         foreach ($data['daily'] as $change) {
@@ -17,7 +17,8 @@ class CambiosResponse extends DateTimeResponse
         }
     }
 
-    public function getChanges (): array {
+    public function getChanges (): array
+	{
         return $this->changes;
     }
 }

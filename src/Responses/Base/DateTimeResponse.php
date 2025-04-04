@@ -7,7 +7,7 @@ abstract class DateTimeResponse extends Response
     protected string $date;
     protected string $time;
 
-    public function __construct($statusCode, array $data)
+    public function __construct (int $statusCode, array $data)
     {
         parent::__construct($statusCode);
         $this->date = $data['datetime']['date'];

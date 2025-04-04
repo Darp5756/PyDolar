@@ -16,7 +16,7 @@ class MonitorResponse extends Response
     private string $symbol;
     private string $title;
 
-    public function __construct($statusCode, array $data)
+    public function __construct (int $statusCode, array $data)
     {
         parent::__construct($statusCode);
         $this->change = $data['change'];

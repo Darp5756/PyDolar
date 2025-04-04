@@ -2,14 +2,17 @@
 
 namespace Darp5756\PyDolar\Responses\Base;
 
-abstract class Response {
-    protected $statusCode;
+abstract class Response
+{
+    protected int $statusCode;
 
-    public function __construct($statusCode) {
+    public function __construct (int $statusCode)
+	{
         $this->statusCode = $statusCode;
     }
 
-    public function getStatusCode () {
+    public function getStatusCode (): int
+	{
         return $this->statusCode;
     }
 }

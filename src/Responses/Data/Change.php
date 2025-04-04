@@ -7,7 +7,8 @@ class Change
 	private string $lastUpdate;
     private float $price;
 
-	public function __construct(array $data) {
+	public function __construct (array $data)
+	{
         $this->lastUpdate = $data['last_update'];
         $this->price = $data['price'];
     }
