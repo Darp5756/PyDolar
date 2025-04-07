@@ -13,7 +13,7 @@ class MonitorsResponse extends DateTimeResponse
 	{
         parent::__construct($statusCode, $data);
         foreach ($data['monitors'] as $monitor => $dataMonitor) {
-            $this->monitors[] = [$monitor => new MonitorsResponse($statusCode, $dataMonitor)];
+            $this->monitors[] = [$monitor => new MonitorResponse($statusCode, $dataMonitor)];
         }
     }
 
