@@ -8,7 +8,7 @@ class MonitorResponse extends Response
 {
     private float $change;
     private string $color;
-    private string $image;
+    private ?string $image;
     private string $lastUpdate;
     private float $percent;
     private float $price;
