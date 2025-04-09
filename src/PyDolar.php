@@ -16,6 +16,7 @@ use Darp5756\PyDolar\Responses\MonitorResponse;
 use Darp5756\PyDolar\Responses\MonitorsResponse;
 use Darp5756\PyDolar\Responses\ValorResponse;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
@@ -264,8 +265,13 @@ class PyDolar
         string $uri,
         array $query,
         bool $includeAuthorization,
+		?float $timeout = null,
     ): ResponseInterface|ErrorResponse
 	{
+		$timeoutUtilizar = floatval($timeout ?? env('PYDOLAR_TIMEOUT') ?? 0);
+		if ($timeoutUtilizar < 0) {
+			throw new InvalidArgumentException('Timeout cannot be less than or equal to 0.');
+		}
         try {
             $headers = [
                 'content-type' => 'application/json',
@@ -279,9 +285,12 @@ class PyDolar
 				[
 					'headers' => $headers,
 					'query' => $query,
+					'timeout' => $timeoutUtilizar,
 				]
 			);
             return $response;
+		} catch (ConnectException $e) {
+				return new ErrorResponse(0, 'Timeout', 'The request exceeded the timeout limit.');
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
                 $statusCode = $e->getResponse()->getStatusCode();
