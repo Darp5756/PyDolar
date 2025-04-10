@@ -283,7 +283,7 @@ class PyDolar
 	{
 		$timeoutUtilizar = floatval($timeout ?? env('PYDOLAR_TIMEOUT') ?? 0);
 		if ($timeoutUtilizar < 0) {
-			throw new InvalidArgumentException('Timeout cannot be less than or equal to 0.');
+			throw new InvalidArgumentException('Timeout cannot be less than 0.');
 		}
         try {
             $headers = [
@@ -303,7 +303,7 @@ class PyDolar
 			);
             return $response;
 		} catch (ConnectException $e) {
-				return new ErrorResponse(0, 'Timeout', 'The request exceeded the timeout limit.');
+			return new ErrorResponse(0, 'Timeout', 'The request exceeded the timeout limit.');
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
                 $statusCode = $e->getResponse()->getStatusCode();
