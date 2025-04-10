@@ -16,6 +16,13 @@ Agrega la siguiente variable de entorno en el archivo `.env`:
 PYDOLAR_TOKEN=token
 ```
 
+Las consultas no tienen timeout definido. Puedes pasarlo como parámetro a las funciones
+o establecer uno global como variable de entorno en el archivo `.env`:
+
+```
+PYDOLAR_TIMEOUT=segundos
+```
+
 ## Créditos
 
 Este paquete utiliza la API proporcionada por [fcoagz](https://github.com/fcoagz) en el proyecto [api-pydolarvenezuela](https://github.com/fcoagz/api-pydolarvenezuela).

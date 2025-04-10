@@ -100,6 +100,7 @@ class PyDolar
 	 * @param string $monitor Monitor a consultar (por defecto es una cadena vacía).
 	 * @param FormatDates $formatDate Formato de fecha para la consulta (por defecto es `default`).
 	 * @param RoundedPrices $roundedPrice Indicador de precios redondeados (por defecto es `true`).
+	 * @param ?float $timeout Tiempo máximo de espera para la solicitud (en segundos).
 	 * @return MonitorResponse|MonitorsResponse|ErrorResponse Respuesta con los datos del monitor o un error.
 	 */
 	public static function getDataMonitor (
@@ -108,6 +109,7 @@ class PyDolar
 		string $monitor = '',
 		FormatDates $formatDate = FormatDates::default,
 		RoundedPrices $roundedPrice = RoundedPrices::true,
+		?float $timeout = null,
 	): MonitorResponse|MonitorsResponse|ErrorResponse
 	{
 		self::validateMonitor($currency, $page, $monitor, true);
@@ -120,6 +122,7 @@ class PyDolar
 				'rounded_price' => $roundedPrice->value,
 			],
 			false,
+			$timeout,
 		);
 		if ($response instanceof ErrorResponse) {
 			return $response;
@@ -141,6 +144,7 @@ class PyDolar
 	 * @param FormatDates $formatDate Formato de fecha para la respuesta (por defecto es `default`).
 	 * @param RoundedPrices $roundedPrice Indica si se deben redondear los precios (por defecto es `true`).
 	 * @param Orders $order Orden de los resultados (por defecto es `desc`).
+	 * @param ?float $timeout Tiempo máximo de espera para la solicitud (en segundos).
 	 * @return HistorialResponse|ErrorResponse Respuesta con los datos históricos o un error.
 	 */
 	public static function getDataHistorial(
@@ -152,6 +156,7 @@ class PyDolar
         FormatDates $formatDate = FormatDates::default,
         RoundedPrices $roundedPrice = RoundedPrices::true,
         Orders $order = Orders::desc,
+		?float $timeout = null,
     ): HistorialResponse|ErrorResponse
 	{
         self::validateMonitor($currency, $page, $monitor, false);
@@ -167,6 +172,7 @@ class PyDolar
                 'order' => $order->value,
             ],
             true,
+			$timeout,
         );
         if ($response instanceof ErrorResponse) {
             return $response;
@@ -184,6 +190,7 @@ class PyDolar
 	 * @param FormatDates $formatDate Formato de fecha para la respuesta (por defecto es `default`).
 	 * @param RoundedPrices $roundedPrice Indica si se deben redondear los precios (por defecto es `true`).
 	 * @param Orders $order Orden de los resultados (por defecto es `desc`).
+	 * @param ?float $timeout Tiempo máximo de espera para la solicitud (en segundos).
 	 * @return CambiosResponse|ErrorResponse Respuesta con los datos de cambios o un error.
 	 */
 	public static function getDataCambios(
@@ -194,6 +201,7 @@ class PyDolar
         FormatDates $formatDate = FormatDates::default,
         RoundedPrices $roundedPrice = RoundedPrices::true,
         Orders $order = Orders::desc,
+		?float $timeout = null,
     ): CambiosResponse|ErrorResponse
 	{
         self::validateMonitor($currency, $page, $monitor, false);
@@ -208,6 +216,7 @@ class PyDolar
                 'order' => $order->value,
             ],
             true,
+			$timeout,
         );
         if ($response instanceof ErrorResponse) {
             return $response;
@@ -223,6 +232,7 @@ class PyDolar
 	 * @param float $value Valor a convertir.
 	 * @param Pages $page Página que se utilizará en la consulta.
 	 * @param string $monitor Monitor a utilizar en la consulta.
+	 * @param ?float $timeout Tiempo máximo de espera para la solicitud (en segundos).
 	 * @return ValorResponse|ErrorResponse Respuesta con los datos de conversión o un error.
 	 */
 	public static function getDataValor(
@@ -231,6 +241,7 @@ class PyDolar
 		float $value,
 		Pages $page,
 		string $monitor,
+		?float $timeout = null,
 	): ValorResponse|ErrorResponse
 	{
 		self::validateMonitor($currency, $page, $monitor, false);
@@ -243,6 +254,7 @@ class PyDolar
                 'monitor' => $monitor,
             ],
             false,
+			$timeout,
         );
         if ($response instanceof ErrorResponse) {
             return $response;
@@ -259,6 +271,7 @@ class PyDolar
 	 * @param string $uri URI a la que se enviará la solicitud GET.
 	 * @param array $query Parámetros de consulta para la solicitud GET.
 	 * @param bool $includeAuthorization Indica si se debe incluir el token de autorización en los encabezados.
+	 * @param ?float $timeout Tiempo máximo de espera para la solicitud (en segundos).
 	 * @return ResponseInterface|ErrorResponse Respuesta de la API o un objeto `ErrorResponse` en caso de error.
 	 */
 	private static function getData (
