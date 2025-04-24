@@ -7,6 +7,11 @@
             "Darp5756\\PyDolar\\": "src/"
         }
     },
+	"autoload-dev": {
+        "psr-4": {
+            "Darp5756\\PyDolar\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Darp5756",
@@ -19,5 +24,12 @@
     "require-dev": {
         "phpunit/phpunit": "^11.5",
         "laravel/framework": "11.44.1"
+    },
+	"extra": {
+        "laravel": {
+            "providers": [
+                "Darp5756\\PyDolar\\PyDolarServiceProvider"
+            ]
+        }
     }
 }

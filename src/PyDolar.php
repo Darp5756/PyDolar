@@ -281,7 +281,7 @@ class PyDolar
 		?float $timeout = null,
     ): ResponseInterface|ErrorResponse
 	{
-		$timeoutUtilizar = floatval($timeout ?? env('PYDOLAR_TIMEOUT') ?? 0);
+		$timeoutUtilizar = floatval($timeout ?? config('pydolar.timeout') ?? 0);
 		if ($timeoutUtilizar < 0) {
 			throw new InvalidArgumentException('Timeout cannot be less than 0.');
 		}
@@ -290,7 +290,7 @@ class PyDolar
                 'content-type' => 'application/json',
             ];
             if ($includeAuthorization) {
-                $headers['Authorization'] = 'Bearer ' . env('PYDOLAR_TOKEN');
+                $headers['Authorization'] = 'Bearer ' . config('pydolar.token');
             }
 			$client = new Client();
             $response = $client->get(

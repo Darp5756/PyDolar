@@ -45,9 +45,9 @@ class PyDolarTest extends TestCase
 	{
 		// Cargar variables de entorno
 		Dotenv::createImmutable(__DIR__.'/../../')->load();
-		self::$date = Carbon::parse(env('PYDOLAR_TEST_DATE'));
-		self::$startDate = Carbon::parse(env('PYDOLAR_TEST_START_DATE'));
-		self::$endDate = Carbon::parse(env('PYDOLAR_TEST_END_DATE'));
+		self::$date = Carbon::parse(config('pydolar-test.date'));
+		self::$startDate = Carbon::parse(config('pydolar-test.start_date'));
+		self::$endDate = Carbon::parse(config('pydolar-test.end_date'));
 	}
 
 	#region Pruebas para getMonitors ($currency, $page)
