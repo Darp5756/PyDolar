@@ -38,7 +38,7 @@ class PyDolarServiceProvider extends ServiceProvider
 
         // Publicar la configuración de pruebas con la etiqueta 'pydolar-test-config'
         $this->publishes([
-            __DIR__.'/../config/pydolar_test.php' => config_path('pydolar_test.php'),
+            __DIR__.'/../config/pydolar-test.php' => config_path('pydolar-test.php'),
         ], 'pydolar-test-config');
     }
 }
