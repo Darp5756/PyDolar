@@ -20,4 +20,14 @@ return [
      */
     'timeout' => env('PYDOLAR_TIMEOUT', 0),
 
+	/**
+	 * Controla la verificación del certificado SSL en Guzzle.
+	 * - `true`: Habilita la verificación SSL.
+	 * - `false`: Desactiva la verificación SSL.
+	 * - Ruta de archivo PEM: Especifica el archivo de certificados para la verificación.
+	 *
+	 * @var bool|string
+	 */
+	'verify_ssl' => env('PYDOLAR_VERIFY_SSL', true),
+
 ];

@@ -292,7 +292,9 @@ class PyDolar
             if ($includeAuthorization) {
                 $headers['Authorization'] = 'Bearer ' . config('pydolar.token');
             }
-			$client = new Client();
+			$client = new Client([
+				'verify' => config('pydolar.verify_ssl'),
+			]);
             $response = $client->get(
 				$uri,
 				[
